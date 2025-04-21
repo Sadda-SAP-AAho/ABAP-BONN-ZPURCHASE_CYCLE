@@ -20,7 +20,17 @@ ENDCLASS.
 
 
 
-CLASS zc_stockpurchase IMPLEMENTATION.
+CLASS ZC_STOCKPURCHASE IMPLEMENTATION.
+
+
+      METHOD getCID.
+            TRY.
+                cid = to_upper( cl_uuid_factory=>create_system_uuid( )->create_uuid_x16( ) ).
+            CATCH cx_uuid_error.
+                ASSERT 1 = 0.
+            ENDTRY.
+      ENDMETHOD.
+
 
     METHOD if_apj_dt_exec_object~get_parameters.
         " Return the supported selection parameters here
@@ -34,6 +44,7 @@ CLASS zc_stockpurchase IMPLEMENTATION.
         ).
 
     ENDMETHOD.
+
 
     METHOD if_apj_rt_exec_object~execute.
         runJob(  ).
@@ -190,13 +201,5 @@ CLASS zc_stockpurchase IMPLEMENTATION.
         CLEAR: po_lines.
         ENDLOOP.
 
-      ENDMETHOD.
-
-      METHOD getCID.
-            TRY.
-                cid = to_upper( cl_uuid_factory=>create_system_uuid( )->create_uuid_x16( ) ).
-            CATCH cx_uuid_error.
-                ASSERT 1 = 0.
-            ENDTRY.
       ENDMETHOD.
 ENDCLASS.

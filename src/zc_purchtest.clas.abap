@@ -11,7 +11,7 @@ ENDCLASS.
 
 
 
-CLASS zc_purchtest IMPLEMENTATION.
+CLASS ZC_PURCHTEST IMPLEMENTATION.
 
 
     METHOD if_oo_adt_classrun~main.
